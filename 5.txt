@@ -1,0 +1,200 @@
+5
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class SimpleInterestCalculator {
+    private JTextField principalField;
+    private JTextField rateField;
+    private JTextField timeField;
+    private JButton calculateButton;
+    private JLabel resultLabel;
+
+    public SimpleInterestCalculator() {
+        JFrame frame = new JFrame("Simple Interest Calculator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2));
+
+        JLabel principalLabel = new JLabel("Principal Amount:");
+        principalField = new JTextField();
+        JLabel rateLabel = new JLabel("Interest Rate (%):");
+        rateField = new JTextField();
+        JLabel timeLabel = new JLabel("Time Period (years):");
+        timeField = new JTextField();
+        calculateButton = new JButton("Calculate");
+        resultLabel = new JLabel("Simple Interest will be shown here.");
+
+        panel.add(principalLabel);
+        panel.add(principalField);
+        panel.add(rateLabel);
+        panel.add(rateField);
+        panel.add(timeLabel);
+        panel.add(timeField);
+        panel.add(calculateButton);
+        panel.add(resultLabel);
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateSimpleInterest();
+            }
+        });
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+
+    private void calculateSimpleInterest() {
+        try {
+            double principal = Double.parseDouble(principalField.getText());
+            double rate = Double.parseDouble(rateField.getText());
+            double time = Double.parseDouble(timeField.getText());
+
+            double interest = (principal * rate * time) / 100;
+
+            resultLabel.setText("Simple Interest: " + interest);
+        } catch (NumberFormatException ex) {
+            resultLabel.setText("Invalid input. Please enter valid numbers.");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new SimpleInterestCalculator();
+            }
+        });
+    }
+}
+
+6
+
+package lab9;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class StudentRegistrationForm {
+    private final JTextField rollField;
+    private final JTextField nameField;
+    private final JTextField collegeField;
+    private final JRadioButton maleRadio;
+    private final JRadioButton femaleRadio;
+    private final JCheckBox readingCheck;
+    private final JCheckBox sportsCheck;
+    private final JCheckBox musicCheck;
+    private final JComboBox<String> programComboBox;
+    private final JButton saveButton;
+    private final JTextArea displayArea;
+
+    public StudentRegistrationForm() {
+        JFrame frame = new JFrame("Student Registration Form");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.setLayout(null); // Use null layout
+
+        JPanel panel = new JPanel();
+        panel.setBounds(10, 10, 360, 300);
+        panel.setLayout(null);
+
+        JLabel rollLabel = new JLabel("Roll:");
+        rollLabel.setBounds(10, 10, 80, 25);
+        rollField = new JTextField();
+        rollField.setBounds(100, 10, 250, 25);
+        JLabel nameLabel = new JLabel("Name:");
+        nameLabel.setBounds(10, 40, 80, 25);
+        nameField = new JTextField();
+        nameField.setBounds(100, 40, 250, 25);
+        JLabel collegeLabel = new JLabel("College:");
+        collegeLabel.setBounds(10, 70, 80, 25);
+        collegeField = new JTextField();
+        collegeField.setBounds(100, 70, 250, 25);
+        JLabel genderLabel = new JLabel("Gender:");
+        genderLabel.setBounds(10, 100, 80, 25);
+        maleRadio = new JRadioButton("Male");
+        maleRadio.setBounds(100, 100, 80, 25);
+        femaleRadio = new JRadioButton("Female");
+        femaleRadio.setBounds(200, 100, 80, 25);
+        ButtonGroup genderGroup = new ButtonGroup();
+        genderGroup.add(maleRadio);
+        genderGroup.add(femaleRadio);
+        JLabel hobbiesLabel = new JLabel("Hobbies:");
+        hobbiesLabel.setBounds(10, 130, 80, 25);
+        readingCheck = new JCheckBox("Reading");
+        readingCheck.setBounds(100, 130, 80, 25);
+        sportsCheck = new JCheckBox("Sports");
+        sportsCheck.setBounds(200, 130, 80, 25);
+        musicCheck = new JCheckBox("Music");
+        musicCheck.setBounds(300, 130, 80, 25);
+        JLabel programLabel = new JLabel("Program:");
+        programLabel.setBounds(10, 160, 80, 25);
+        String[] programs = {"Bachelor's", "Master's", "Ph.D."};
+        programComboBox = new JComboBox<>(programs);
+        programComboBox.setBounds(100, 160, 250, 25);
+        saveButton = new JButton("Save");
+        saveButton.setBounds(150, 190, 80, 25);
+        displayArea = new JTextArea();
+        displayArea.setBounds(10, 220, 360, 130);
+
+        panel.add(rollLabel);
+        panel.add(rollField);
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(collegeLabel);
+        panel.add(collegeField);
+        panel.add(genderLabel);
+        panel.add(maleRadio);
+        panel.add(femaleRadio);
+        panel.add(hobbiesLabel);
+        panel.add(readingCheck);
+        panel.add(sportsCheck);
+        panel.add(musicCheck);
+        panel.add(programLabel);
+        panel.add(programComboBox);
+        panel.add(saveButton);
+
+        saveButton.addActionListener((ActionEvent e) -> {
+            saveStudentInformation();
+        });
+
+        frame.add(panel);
+        frame.add(displayArea);
+        frame.setVisible(true);
+    }
+
+    private void saveStudentInformation() {
+        String roll = rollField.getText();
+        String name = nameField.getText();
+        String college = collegeField.getText();
+        String gender = maleRadio.isSelected() ? "Male" : "Female";
+        StringBuilder hobbies = new StringBuilder();
+        if (readingCheck.isSelected()) {
+            hobbies.append("Reading ");
+        }
+        if (sportsCheck.isSelected()) {
+            hobbies.append("Sports ");
+        }
+        if (musicCheck.isSelected()) {
+            hobbies.append("Music ");
+        }
+        String program = programComboBox.getSelectedItem().toString();
+
+        // Display the student information in the TextArea
+        displayArea.setText("Roll: " + roll + "\nName: " + name + "\nCollege: " + college +
+                "\nGender: " + gender + "\nHobbies: " + hobbies.toString() + "\nProgram: " + program);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new StudentRegistrationForm();
+        });
+    }
+}
