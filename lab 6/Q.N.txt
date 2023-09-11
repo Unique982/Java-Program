@@ -1,0 +1,5 @@
+// Create a base class fruit which has name, taste and size as its attrubities. A method called eat() is created which describe the name of the of the first and its taste. Inherit the same in 2 other class apple and orange and override eat() method to represent each fruit taste.
+// Write a java program to created class named shaped. It should cantain one method, are() that prints area od Shape. For this class created two sub class triangle and Rectangle and each class should override the parent class function area(). Create object of triangle and Rectangle to observe the polymarphic nature of class.
+// Write a java program to develop claculator application (add, subtract, Multiplication and division) using multiple inheritance 
+// Write a java class to implement caoncept of abstract class and abstract method
+// Write a java program to crate user defined pacakage and containing Employee class( (EID) Ename, Eaddress,and salary) and use this package in another class or packages
