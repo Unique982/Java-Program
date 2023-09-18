@@ -1,59 +1,62 @@
-class Time
-{
-int hours,minutes,seconds;
-Time()
-{
+class Time{
+    int hour,minute,second;
+    public Time(){}
+    public Time(int h,int m,int s){
+        hour=h;
+        minute=m;
+        second=s;
+    }
+    public void display1(){
+        System.out.println(hour+":"+minute+":"+second);
+    }
+    public Time addTime(Time t1){
+        Time temp=new Time();
+        temp.hour=hour+t1.hour;
+        temp.minute=minute+t1.minute;
+        temp.second=second+t1.second;
+        if(temp.second>59){
+            temp.second-=60;
+            temp.minute+=1;
+        }
+        if(temp.minute>=60){
+            temp.minute -=60;
+            temp.hour +=1;
+        }
+        return temp;
+    }
+     public void display2(){
+        System.out.println(hour+":"+minute+":"+second);
+    }
+    public Time subTime(Time t1){
+        Time temp=new Time();
+        temp.hour=hour-t1.hour;
+        temp.minute=minute-t1.minute;
+        temp.second=second-t1.second;
+        if(temp.second<0){
+            temp.second+=60;
+            temp.minute-=1;
+        }
+        if(temp.minute<0){
+            temp.minute +=60;
+            temp.hour -=1;
+        }
+        return temp;
+    }
 }
- Time( int h,int m, int s);
-{
-hours=h;
-minutes=m;
-seconds=s;
-}
-public void display()
+public class Example2 {
 
-{
-System.out.println(hours+":"minutes+:":"seconds):
-}
-}
-public Time addTime(Time t1)
-{
-Time temp=new Time();
-temp.hours=hours+t1.hours;
-temp.minutes=minutes+t1.minutes;
-temp.seconds=seconds+t1.seconds;
-
-if(temp.seconds>=60)
-{
-temp.seconds-=60;
-temp.minutes+=1;
-}
- if(temp.minutes>=60;
-{
-temp.minutes+=60;
-temp.hours+=1;
-}
-return temp;
-}
-
-public Time subTime(Time t1)
-{
-Time diffTime=new Time();
-diffTime.hours=hours-t1.hours;
-diffTime.minutes=minutes-t1.minutes;
-diffTime.seconds=seconds-t1.seconds;
-if(diffTime.seconds<0)
-{
-diffTime.seconds+=60;
-diffTime.minutes-1
-
-
-
-public class Example2
-{
-public static void main(String [] args)
-  {
-Time t=new Time(10,25,5);
-t.dipslay();
-System.out.println(t.hours);
+    public static void main(String[] args) {
+        Time t1=new Time(4,40,30);
+        System.out.println("First time:");
+        t1.display1();
+        Time t2=new Time(7,30,50);
+        System.out.println("Second Time:");
+        t2.display1();
+        Time t3=t1.addTime(t2);
+        System.out.println("Result Time:");
+        t3.display1();
+        Time t4=t1.subTime(t2);
+        System.out.println("Result Time:");
+        t4.display2();
+    }
 }
